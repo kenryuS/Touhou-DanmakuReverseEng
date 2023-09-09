@@ -6,6 +6,9 @@
 #include <player.h>
 #include <stdlib.h>
 #include <screens.h>
+#include <screens/title.h>
+#include <screens/gamePlay.h>
+#include <screens/gameEnd.h>
 
 void update(void);
 void draw(void);
