@@ -9,8 +9,9 @@ typedef struct {
     float x;
     float y;
     bool isActive;
+    unsigned int id;
+    char* name;
     int health;
-    int cardId;
 } Boss;
 
 #endif // BOSS_H_

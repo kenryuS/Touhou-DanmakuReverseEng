@@ -1,3 +1,5 @@
+#include "player.h"
+#include <raylib.h>
 #include <screens/gameEnd.h>
 #include <string.h>
 
@@ -12,6 +14,9 @@ void gameend_render(Player* pl) {
 void gameend_update(Screens* scr, Player* pl) {
     if (IsKeyPressed(KEY_SPACE)) {
         *scr = TITLE;
+        for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
+            UnloadTexture((pl->tama[i]).texture);
+        }
         player_init(pl);
     }
     return;

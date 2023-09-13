@@ -3,16 +3,21 @@ set(SOURCES
   player.c
   config.c
   util.c
+  tama.c
   screens/title.c
   screens/gamePlay.c
   screens/gameEnd.c
+)
+
+set(ASESTS_SOURCES
+  ${CMAKE_SOURCE_DIR}/assets/player_tama.c
 )
 
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Dependencies
-set(RAYLIB_VERSION 4.5.0)
+set(RAYLIB_VERSION 4.2.0)
 find_package(raylib ${RAYLIB_VERSION} REQUIRED) # QUIET or REQUIRED
 if (NOT raylib_FOUND) # If there's none, fetch and build raylib
   include(FetchContent)
@@ -30,9 +35,8 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
   endif()
 endif()
 
-add_executable(Touhou-DanmakuReverseEng ${SOURCES})
+add_executable(Touhou-DanmakuReverseEng ${SOURCES} ${ASESTS_SOURCES})
 target_include_directories(Touhou-DanmakuReverseEng PUBLIC
   ${CMAKE_SOURCE_DIR}/include
-  ${CMAKE_SOURCE_DIR}/assets
 )
 target_link_libraries(Touhou-DanmakuReverseEng raylib m)

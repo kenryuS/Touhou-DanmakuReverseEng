@@ -1,8 +1,11 @@
+#include "player.h"
 #include <main.h>
 
-struct Player* player = &(struct Player){(float)SCREEN_WIDTH/3, 800.0f, false, 0};
+struct Player* player = &(struct Player){(float)SCREEN_WIDTH/3, 800.0f, false, 0, 0, 0};
 
 Screens currentScr = TITLE;
+
+int globalTick = 0;
 
 void update(void) {
     if (currentScr == TITLE) {
@@ -10,11 +13,12 @@ void update(void) {
     }
     if (currentScr == GAMEPLAY) {
         gameplay_update(&currentScr);
-        player_control(player);
+        player_update(player);
         if (IsKeyDown(KEY_PAGE_UP)) player->score++;
         if (IsKeyDown(KEY_PAGE_DOWN)) player->score--;
     }
     if (currentScr == ENDING) gameend_update(&currentScr, player);
+    globalTick++;
     return;
 }
 
@@ -33,6 +37,7 @@ EndDrawing();}
 int main(int argc, char** argv) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE);
     SetTargetFPS(FPS);
+    player_init(player);
 
     while (!WindowShouldClose()) {
         update();
