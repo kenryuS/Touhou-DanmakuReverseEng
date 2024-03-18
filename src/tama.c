@@ -1,35 +1,17 @@
 #include "tama.h"
 #include <raylib.h>
 
-void tama_init(Tama *tama, float cx, float cy, TamaType type, Image img, bool isFromPlayer) {
-    tama->cx = cx;
-    tama->cy = cy;
-    tama->r = 0.0f;
-    tama->t = 0.0f;
+void tama_init(Tama *tama, Vector2 center_pos, TamaType type, Image img, bool isFromPlayer, Hitbox_e hb_type) {
+    tama->core = sprite_create(POLAR, (Vector2){0.0f,0.0f}, center_pos, 0, LoadTextureFromImage(img), hb_type);
     tama->type = type;
     tama->isFromPlayer = isFromPlayer;
-    tama->texture = LoadTextureFromImage(img);
-    tama->isActive = false;
-    return;
-}
-
-void tama_setCenterPos(Tama *tama, float x, float y) {
-    tama->cx = x;
-    tama->cy = y;
-    return;
-}
-
-void tama_setPolPos(Tama *tama, float r, float t) {
-    tama->r = r;
-    tama->t = t;
     return;
 }
 
 void tama_render(Tama *tama) {
-    if (!tama->isActive) {return;}
-    float x = tama->r * cos(tama->t) + tama->cx;
-    float y = tama->r * sin(tama->t) + tama->cy;
-    DrawTexture(tama->texture, x-8, y-8, WHITE);
-    //DrawCircle(x, y, 10, YELLOW);
+    if (!tama->core.isActive) {return;}
+    float x = tama->core.pos.x * cos(tama->core.pos.y) + tama->core.aux_pos.x;
+    float y = tama->core.pos.x * sin(tama->core.pos.y) + tama->core.aux_pos.y;
+    DrawTexture(tama->core.texture, x-8, y-8, WHITE);
     return;
 }

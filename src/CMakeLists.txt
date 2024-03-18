@@ -1,9 +1,13 @@
 set(SOURCES
   main.c
+  sprite-base.c
+  hitbox.c
   player.c
   config.c
   util.c
   tama.c
+  boss.c
+  spell_cards/demo.c
   screens/title.c
   screens/gamePlay.c
   screens/gameEnd.c

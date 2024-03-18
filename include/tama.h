@@ -5,31 +5,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "sprite-base.h"
+#include "hitbox.h"
 
 typedef enum {
     SMALL,
     NORMAL,
     LARGE,
     OHUDA,
-    STAR
+    STAR,
+    LASER
 } TamaType;
 
 typedef struct {
-    float cx;
-    float cy;
-    float r;
-    float t;
+    Sprite core;
     TamaType type;
     bool isFromPlayer;
-    Texture2D texture;
-    bool isActive;
 } Tama;
 
 void tama_render(Tama* tama);
 
-void tama_setCenterPos(Tama* tama, float x, float y);
-void tama_setPolPos(Tama* tama, float r, float t);
-
-void tama_init(Tama *tama, float cx, float cy, TamaType type, Image img, bool isFromPlayer);
+void tama_init(Tama *tama, Vector2 center_pos, TamaType type, Image img, bool isFromPlayer, Hitbox_e hb_type);
 
 #endif // TAMA_H_

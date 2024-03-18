@@ -6,4 +6,4 @@ The recreation of my personally favorite characters' Spellcards in Touhou game s
 
 Made with [raylib](https://github.com/raysan5/raylib)
 
-This project is a derivative work of Touhou Project, originally created by Shanghai Alice Phantom. It may contain difference from original game.
+This project is a derivative work of Touhou Project, originally created by Shanghai Alice Phantom. It may contain differences from original game.
