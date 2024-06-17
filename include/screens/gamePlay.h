@@ -6,13 +6,12 @@
 #include <screens.h>
 #include <player.h>
 #include <boss.h>
+#include <game.h>
 #include <util.h>
-#include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
 
-void gameplay_render(Player* pl, BossSprite* boss, Bosses selected_boss);
+void gameplay_render(Game *game);
 
-void gameplay_update(Screens* scr, Player* pl, BossSprite* boss, Bosses selected_boss);
+void gameplay_update(Game *game);
 
 #endif // GAMEPLAY_H_

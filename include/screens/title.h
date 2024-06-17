@@ -4,9 +4,10 @@
 #include <raylib.h>
 #include <screens.h>
 #include <config.h>
+#include <game.h>
 
-void title_render(void);
+void title_render(Game *game);
 
-void title_update(Screens *scr);
+void title_update(Game *game);
 
 #endif // TITLE_H_

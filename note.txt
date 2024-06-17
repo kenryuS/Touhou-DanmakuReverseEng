@@ -1,0 +1,13 @@
+Note:
+
+dimenssion ratio
+
+window: 4:3
+
+play-area:
+	window width : play area width = 5 : 3
+	window height : play area height = 15 : 14
+
+offset:
+	window width : offset x = 20 : 1
+	window height : offset y = 30 : 1

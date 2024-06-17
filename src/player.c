@@ -26,34 +26,38 @@ void player_update(Player* player) {
     player_tama_update(player);
     player->core.hitbox.core.circle.center = player->core.pos;
     player->core.ticks++;
+    player->core.time += GetFrameTime();
 }
 
 Player player_init() {
     Player player = {};
     player.status = (Player_Status){0,0};
-    player.core = sprite_create(RECT, (Vector2){SCREEN_WIDTH/3.0f, 800.0f}, (Vector2){0.0f,0.0f}, 1, (Texture2D){}, HB_CIRCLE);
+    player.core = sprite_create(RECT, (Vector2){SCREEN_WIDTH/3.0f, 800.0f}, (Vector2){0.0f,0.0f}, 1, NULL, HB_CIRCLE);
     player.core.hitbox.core.circle.radius = 15;
     player.core.hitbox.core.circle.center = player.core.pos;
     extern const unsigned char player_tama_png[];
     extern const unsigned int player_tama_png_len;
     Image player_tama_img = LoadImageFromMemory(".png", player_tama_png, player_tama_png_len);
-    for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
-        tama_init(&(player.tama[i]), (Vector2){player.core.pos.x, player.core.pos.y}, NORMAL, player_tama_img, true, HB_CIRCLE);
-    }
+    Texture2D player_tama_texture = LoadTextureFromImage(player_tama_img);
     UnloadImage(player_tama_img);
+    for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
+        tama_init(&(player.tama[i]), (Vector2){player.core.pos.x, player.core.pos.y}, NORMAL, &player_tama_texture, true, HB_CIRCLE);
+    }
     return player;
 }
 
 void player_shoot(Player* player) {
-    if (player->core.ticks % (60 / PLAYER_TAMA_SHOT_SPEED) != 0) return;
-    for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
+    // if (player->core.ticks % (60 / PLAYER_TAMA_SHOT_SPEED) != 0) return;
+    if (player->core.time < 1.0f/PLAYER_TAMA_SHOT_SPEED) return;
+    printf("%f\n", player->core.time);
+    player->core.time = 0;
+    for (int i = 0; i < PLAYER_TAMA_NUM; i+=2) {
         Tama* target = &(player->tama[i]);
         if (target->core.isActive == false) {
             target->core.isActive = true;
-            target->core.pos.y = PI / -2.0f;
+            target->core.pos.y = (PI / -2.0f);
             target->core.pos.x = 0;
             target->core.aux_pos = player->core.pos;
-            break;
         }
     }
 }

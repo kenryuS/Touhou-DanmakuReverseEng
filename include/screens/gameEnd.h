@@ -6,10 +6,10 @@
 #include <config.h>
 #include <util.h>
 #include <player.h>
-#include <string.h>
+#include <game.h>
 
-void gameend_render(Player* pl);
+void gameend_render(Game *game);
 
-void gameend_update(Screens* scr, Player* pl);
+void gameend_update(Game *game);
 
 #endif // GAMEEND_H_

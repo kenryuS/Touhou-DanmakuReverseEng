@@ -7,8 +7,9 @@ set(SOURCES
   util.c
   tama.c
   boss.c
-  spell_cards/demo.c
+  bosses/demo.c
   screens/title.c
+  screens/gameSetup.c
   screens/gamePlay.c
   screens/gameEnd.c
 )

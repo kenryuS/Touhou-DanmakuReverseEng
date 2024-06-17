@@ -11,11 +11,11 @@
 #include "tama.h"
 #include "sprite-base.h"
 
-#define PLAYER_SPEED 7.0f
-#define PLAYER_SPEED_SLOWMULTI 0.30f
-#define PLAYER_TAMA_NUM 127
-#define PLAYER_TAMA_SPEED 16.0f
-#define PLAYER_TAMA_SHOT_SPEED 16 // per second (60 frames)
+#define PLAYER_SPEED 512.0f
+#define PLAYER_SPEED_SLOWMULTI 0.40f
+#define PLAYER_TAMA_NUM 256
+#define PLAYER_TAMA_SPEED 1536.0f
+#define PLAYER_TAMA_SHOT_SPEED 100 // per second
 
 typedef struct {
     unsigned int score;

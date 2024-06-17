@@ -1,23 +1,21 @@
-#include "player.h"
-#include <raylib.h>
 #include <screens/gameEnd.h>
-#include <string.h>
 
-void gameend_render(Player* pl) {
+void gameend_render(Game *game) {
     char temptxt[30] = "Score: ";
     char buff[20];
-    itoa(pl->status.score, buff);
+    itoa(game->player.status.score, buff);
     strncat(temptxt, buff, 20);
     DrawText(temptxt,SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 20, GRAY);
 }
 
-void gameend_update(Screens* scr, Player* pl) {
+void gameend_update(Game *game) {
     if (IsKeyPressed(KEY_SPACE)) {
-        *scr = TITLE;
+        game->currentScr = TITLE;
         for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
-            UnloadTexture((pl->tama[i]).core.texture);
+            UnloadTexture(*(game->player.tama[i]).core.texture);
         }
-        *pl = player_init();
+        game->player = player_init();
+        game->inited = 0;
     }
     return;
 }

@@ -9,9 +9,4 @@
 #define GAME_TITLE "Touhou Danmaku Reverse Engineer"
 #define FPS 60
 
-// Boss configs
-
-#define BOSS_TEST_NAME "Test Boss"
-#define BOSS_TEST_HEALTH 100.0f
-
 #endif // CONFIG_H_

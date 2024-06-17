@@ -1,46 +1,46 @@
-#include "boss.h"
 #include <main.h>
 
-Player* player = NULL;
-BossSprite boss = {};
-Bosses selected_boss = 0;
-
-Screens currentScr = TITLE;
-
-int globalTick = 0;
-
-void update(void) {
-    switch (currentScr) {
+void update(Game *game) {
+    switch (game->currentScr) {
         case TITLE: {
-            title_update(&currentScr);
+            title_update(game);
+            break;
+        }
+        case GAMESETUP: {
+            game_setup_update(game);
             break;
         }
         case GAMEPLAY: {
-            gameplay_update(&currentScr, player, &boss, selected_boss);
+            gameplay_update(game);
             break;
         }
         case ENDING: {
-            gameend_update(&currentScr, player);
+            gameend_update(game);
             break;
         }
     }
-    globalTick++;
+    game->globalTick++;
+    game->time += GetFrameTime();
     return;
 }
 
-void draw(void) {BeginDrawing();
+void draw(Game *game) {BeginDrawing();
     ClearBackground(RAYWHITE);
-    switch (currentScr) {
+    switch (game->currentScr) {
         case TITLE: {
-            title_render();
+            title_render(game);
+            break;
+        }
+        case GAMESETUP: {
+            game_setup_render(game);
             break;
         }
         case GAMEPLAY: {
-            gameplay_render(player, &boss, selected_boss);
+            gameplay_render(game);
             break;
         }
         case ENDING: {
-            gameend_render(player);
+            gameend_render(game);
             break;
         }
     }
@@ -49,14 +49,19 @@ EndDrawing();}
 int main(int argc, char** argv) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE);
     SetTargetFPS(FPS);
-    Player pl = player_init();
-    player = &pl;
-    selected_boss = TEST;
-    boss_main_init(boss, selected_boss);
+
+    Game game = {
+        .currentScr = TITLE,
+        .player = { 0 },
+        .boss = { 0 },
+        .selected_boss = -1,
+        .globalTick = 0,
+        .inited = 0
+    };
 
     while (!WindowShouldClose()) {
-        update();
-        draw();
+        update(&game);
+        draw(&game);
     }
 
     CloseWindow();

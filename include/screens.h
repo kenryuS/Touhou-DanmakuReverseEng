@@ -4,6 +4,6 @@
 #include <raylib.h>
 #include "config.h"
 
-typedef enum {TITLE = 0, GAMEPLAY, ENDING} Screens;
+typedef enum {TITLE = 0, GAMESETUP, GAMEPLAY, ENDING} Screens;
 
 #endif // SCREENS_H_

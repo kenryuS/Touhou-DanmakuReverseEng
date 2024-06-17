@@ -2,7 +2,7 @@
 
 unsigned int SpriteIDCounter = 0;
 
-Sprite sprite_create(enum Position_Modes mode, Vector2 pos, Vector2 aux_pos, bool isActive, Texture2D tex, Hitbox_e hb_type) {
+Sprite sprite_create(enum Position_Modes mode, Vector2 pos, Vector2 aux_pos, bool isActive, Texture2D* tex, Hitbox_e hb_type) {
     Hitbox hb;
     hb.type = hb_type;
     switch (hb_type) {
@@ -19,11 +19,12 @@ Sprite sprite_create(enum Position_Modes mode, Vector2 pos, Vector2 aux_pos, boo
             break;
         }
     }
-    return (Sprite){++SpriteIDCounter, mode, pos, aux_pos, tex, hb, isActive, 0};
+    return (Sprite){++SpriteIDCounter, mode, pos, aux_pos, tex, hb, isActive, 0, 0};
 }
 
 void sprite_translate(Sprite *target, Vector2 delta) {
-    target->pos = (Vector2){target->pos.x + delta.x, target->pos.y + delta.y};
+    float deltaTime = GetFrameTime();
+    target->pos = (Vector2){target->pos.x + delta.x*deltaTime, target->pos.y + delta.y*deltaTime};
     return;
 }
 

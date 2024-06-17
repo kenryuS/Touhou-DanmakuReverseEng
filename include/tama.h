@@ -25,6 +25,6 @@ typedef struct {
 
 void tama_render(Tama* tama);
 
-void tama_init(Tama *tama, Vector2 center_pos, TamaType type, Image img, bool isFromPlayer, Hitbox_e hb_type);
+void tama_init(Tama *tama, Vector2 center_pos, TamaType type, Texture2D* texture, bool isFromPlayer, Hitbox_e hb_type);
 
 #endif // TAMA_H_
