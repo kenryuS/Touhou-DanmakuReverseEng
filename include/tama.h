@@ -21,7 +21,38 @@ typedef struct {
     Sprite core;
     TamaType type;
     bool isFromPlayer;
+    float deltaTheta;
+    float speed;
+    float deltaSpeed;
 } Tama;
+
+typedef struct {
+    float shotAngle;
+    float shotSpeed;
+    unsigned int interval;
+    unsigned int time;
+} tama_DirectionalShot;
+
+typedef struct {
+    float shotAngle;
+    float deltaShotAngle;
+    float shotSpeed;
+    unsigned int interval;
+    unsigned int time;
+} tama_SpiralShot;
+
+typedef struct {
+    float shotAngle;
+    float deltaShotAngle;
+    float shotSpeed;
+    unsigned char ShotCount;
+    unsigned int interval;
+    unsigned int time;
+} tama_MultiSpiralShot;
+
+// typedef struct {
+
+// } tama_NWayShot;
 
 void tama_render(Tama* tama);
 

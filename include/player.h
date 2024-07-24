@@ -3,9 +3,6 @@
 
 #include "config.h"
 #include <raylib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include "util.h"
 #include "tama.h"
@@ -36,7 +33,7 @@ void player_update(Player* player);
 
 void player_tama_update(Player* player);
 
-Player player_init();
+void player_init(Player* player);
 
 void player_shoot(Player* player);
 

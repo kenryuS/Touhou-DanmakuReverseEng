@@ -14,7 +14,7 @@ void player_control(Player* player) {
 
 void player_render(Player* player) {
     if (!IsKeyDown(KEY_LEFT_SHIFT)) hitbox_render(player->core.hitbox);
-    DrawCircle(player->core.pos.x, player->core.pos.y, 20, RED);
+    DrawCircleV(toPixelCordV(&player->core.cord), 20, RED);
     if (IsKeyDown(KEY_LEFT_SHIFT)) hitbox_render(player->core.hitbox);
     for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
         tama_render(&(player->tama[i]));
@@ -29,21 +29,20 @@ void player_update(Player* player) {
     player->core.time += GetFrameTime();
 }
 
-Player player_init() {
-    Player player = {};
-    player.status = (Player_Status){0,0};
-    player.core = sprite_create(RECT, (Vector2){SCREEN_WIDTH/3.0f, 800.0f}, (Vector2){0.0f,0.0f}, 1, NULL, HB_CIRCLE);
-    player.core.hitbox.core.circle.radius = 15;
-    player.core.hitbox.core.circle.center = player.core.pos;
+void player_init(Player* player) {
+    player->status = (Player_Status){0,0};
+    player->core = sprite_create(RECT, (Vector2){SCREEN_WIDTH/3.0f, 800.0f}, (Vector2){0.0f,0.0f}, 1, NULL, HB_CIRCLE);
+    player->core.hitbox.core.circle.radius = 15;
+    player->core.hitbox.core.circle.center = player.core.pos;
     extern const unsigned char player_tama_png[];
     extern const unsigned int player_tama_png_len;
     Image player_tama_img = LoadImageFromMemory(".png", player_tama_png, player_tama_png_len);
     Texture2D player_tama_texture = LoadTextureFromImage(player_tama_img);
     UnloadImage(player_tama_img);
     for (int i = 0; i < PLAYER_TAMA_NUM; i++) {
-        tama_init(&(player.tama[i]), (Vector2){player.core.pos.x, player.core.pos.y}, NORMAL, &player_tama_texture, true, HB_CIRCLE);
+        tama_init(&(player->tama[i]), (Vector2){player->core.pos.x, player->core.pos.y}, NORMAL, &player_tama_texture, true, HB_CIRCLE);
     }
-    return player;
+    return;
 }
 
 void player_shoot(Player* player) {

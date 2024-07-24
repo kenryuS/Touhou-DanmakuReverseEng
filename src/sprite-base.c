@@ -2,7 +2,7 @@
 
 unsigned int SpriteIDCounter = 0;
 
-Sprite sprite_create(enum Position_Modes mode, Vector2 pos, Vector2 aux_pos, bool isActive, Texture2D* tex, Hitbox_e hb_type) {
+void sprite_create(Local_Cordinate_System* cordSys, Vector2 initPos, bool isActive, Texture2D* tex, Hitbox_e hb_type, Sprite* dest) {
     Hitbox hb;
     hb.type = hb_type;
     switch (hb_type) {
@@ -19,19 +19,26 @@ Sprite sprite_create(enum Position_Modes mode, Vector2 pos, Vector2 aux_pos, boo
             break;
         }
     }
-    return (Sprite){++SpriteIDCounter, mode, pos, aux_pos, tex, hb, isActive, 0, 0};
+    dest->cord = (Local_Cordinate){cordSys, initPos};
+    dest->hitbox = hb;
+    dest->id = ++SpriteIDCounter;
+    dest->isActive = isActive;
+    dest->texture = tex;
+    dest->ticks = 0;
+    dest->time = 0.0f;
+    return;
 }
 
 void sprite_translate(Sprite *target, Vector2 delta) {
     float deltaTime = GetFrameTime();
-    target->pos = (Vector2){target->pos.x + delta.x*deltaTime, target->pos.y + delta.y*deltaTime};
+    target->cord.cord = (Vector2){target->cord.cord.x + delta.x*deltaTime, target->pos.y + delta.y*deltaTime};
     return;
 }
 
 bool sprite_isRect(Sprite *target) {
-    return (target->mode == RECT);
+    return (target->cord.cord_sys->mode == RECT);
 }
 
 bool sprite_isPolar(Sprite *target) {
-    return (target->mode == POLAR);
+    return (target->cord.cord_sys->mode == POLAR);
 }

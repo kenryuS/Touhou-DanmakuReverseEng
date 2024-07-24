@@ -3,9 +3,11 @@ set(SOURCES
   sprite-base.c
   hitbox.c
   player.c
+  local-cordinate.c
   config.c
   util.c
   tama.c
+  game.c
   boss.c
   bosses/demo.c
   screens/title.c

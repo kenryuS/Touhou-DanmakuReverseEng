@@ -5,18 +5,12 @@
 #include "config.h"
 #include <stdbool.h>
 #include "hitbox.h"
+#include "local-cordinate.h"
 #include <stdio.h>
-
-typedef enum Position_Modes {
-    RECT = 1,
-    POLAR,
-} Position_Modes;
 
 typedef struct {
     unsigned int id;
-    Position_Modes mode;
-    Vector2 pos; // (x,y)(Rect), (r,t)(Polar)
-    Vector2 aux_pos; // (NULL,NULL)(Rect), (center_x, center_y)(Polar)
+    Local_Cordinate cord;
     Texture2D* texture;
     Hitbox hitbox;
     bool isActive;
@@ -24,7 +18,7 @@ typedef struct {
     float time; // seconds
 } Sprite;
 
-Sprite sprite_create(Position_Modes mode, Vector2 pos, Vector2 aux_pos, bool isActive, Texture2D* tex, Hitbox_e hb_type);
+void sprite_create(Local_Cordinate_System* cordSys, Vector2 initPos, bool isActive, Texture2D* tex, Hitbox_e hb_type, Sprite* dest);
 
 void sprite_translate(Sprite* target, Vector2 delta);
 

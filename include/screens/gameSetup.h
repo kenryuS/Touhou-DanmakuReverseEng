@@ -7,8 +7,8 @@
 #include <game.h>
 #include <boss.h>
 
-void game_setup_render(Game* game);
+void gamesetup_render(Game* game);
 
-void game_setup_update(Game* game);
+void gamesetup_update(Game* game);
 
 #endif // _GAMESETUP_H_
