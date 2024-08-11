@@ -21,6 +21,7 @@ void gameplay_update(Game *game) {
     if (game->inited == 0) {
         game->inited = 1;
         player_init(&(game->player));
+        game->player.core.cord.cord_sys = &(game->GamePlaneRect);
         //boss_main_init(&(game->boss), game->selected_boss);
         return;
     }
